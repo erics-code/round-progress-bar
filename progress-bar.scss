@@ -1,0 +1,82 @@
+$progress-bar-size: 220px;
+$progress-bar-bar-size: 50px;
+$progress-bar-color: #adcad6;
+$progress-bar-bar-color: #006e90;
+$progress-bar-inner-color: #f18f01;
+
+.progress-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: $progress-bar-size;
+    height: $progress-bar-size;
+    border-radius: $progress-bar-size / 2;
+    background-color: $progress-bar-color;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: $progress-bar-size / 2;
+        height: $progress-bar-size;
+        background-color: $progress-bar-bar-color;
+        transform-origin: center right;
+        border-top-left-radius: $progress-bar-size / 2;
+        border-bottom-left-radius: $progress-bar-size / 2;
+    }
+
+    &:after {
+        content: "";
+        width: $progress-bar-size - $progress-bar-bar-size;
+        height: $progress-bar-size - $progress-bar-bar-size;
+        border-radius: ($progress-bar-size - $progress-bar-bar-size) / 2;
+        background-color: $progress-bar-inner-color;
+        z-index: 1;
+    }
+
+    .progress-bar {
+        position: absolute;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: -$progress-bar-size / 2;
+            left: -$progress-bar-size / 2;
+            width: $progress-bar-size / 2;
+            height: $progress-bar-size;
+            background-color: $progress-bar-color;
+            transform-origin: center right;
+            border-top-left-radius: $progress-bar-size / 2;
+            border-bottom-left-radius: $progress-bar-size / 2;
+        }
+    }
+
+    .progress-value {
+        position: absolute;
+        z-index: 2;
+        color: $progress-bar-bar-color;
+        font-size: $progress-bar-bar-size;
+        font-family: fantasy;
+    }
+
+    @for $percentage from 1 through 100 {
+        &.p#{$percentage} {
+            @if $percentage > 50 {
+                &:before {
+                    transform: rotate(180deg);
+                }
+
+                & .progress-bar:before {
+                    background-color: $progress-bar-bar-color;
+                    transform: rotate((($percentage * 360) / 100) + 0deg);
+                }
+            } @else {
+                &:before {
+                    transform: rotate((($percentage * 180) / 50) + 0deg);
+                }
+            }
+        }
+    }
+}
