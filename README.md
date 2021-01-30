@@ -1,5 +1,5 @@
 # Round Progress Bar
-A CSS file for creating a round progress bar.
+A SCSS file for creating a round progress bar.
 
 ![](https://user-images.githubusercontent.com/6899797/80809181-69e84480-8bc1-11ea-8b25-cd925cc76d68.png)	
 
